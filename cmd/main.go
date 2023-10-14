@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"philip-aws-datavalidation/validate"
+	"philip-datavalidator/validate"
 )
 
 func main() {
@@ -10,7 +10,7 @@ func main() {
 	data := validate.RequestData{
 		Name:  "John Doe",
 		Email: "johndoe@example.com",
-		Phone: "+234-9077421913",
+		Phone: "234-9077421913",
 	}
 
 	// Validate the data

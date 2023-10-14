@@ -1,4 +1,4 @@
-module philip-aws-datavalidation
+module philip-datavalidator
 
 go 1.21.0
 
