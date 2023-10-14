@@ -24,52 +24,86 @@ func IsEmail(email string) bool {
 }
 
 func (rd *RequestData) ValidatePhone() error {
-	// Extract the country code and phone number from the "Phone" field
-	// The format of the "Phone" field should be +XX-XXXXXXXXXX
-
 	if len(rd.Phone) < 10 || rd.Phone[0] != '+' {
-		return errors.New("invalid phone field format, ensure you have + added at the beginning and the right ")
+		return fmt.Errorf("invalid phone field format, ensure you have + added at the beginning of the phone number")
 	}
-	// // Check for the presence of the hyphen at the correct position
-	if rd.Phone[2] != '-' || rd.Phone[3] != '-' || rd.Phone[4] != '-' {
-		return errors.New("invalid phone field format, missing hyphen (-) after a country code")
-	}
-	countryCode := rd.Phone[0:4]
-	phoneNumberNigeria := rd.Phone[5:]
-	phoneNumberUSA := rd.Phone[3:]
-	phoneNumberEngland_Germany := rd.Phone[4:]
-
+	countryCodeNGA := rd.Phone[0:4]
+	countryCodeUSA := rd.Phone[0:2]
+	countryCodeENGGER := rd.Phone[0:3]
 	var pattern string
 
-	switch countryCode {
-	case "+234":
-		pattern = `^\d{10}$` //Nigeria
+	if countryCodeNGA == "+234" {
+		// Handle Nigeria case
+		pattern = `^\d{10}$`
+		hyphenPos := -1
+		for i := 0; i < len(rd.Phone); i++ {
+			if rd.Phone[i] == '-' {
+				hyphenPos = i
+				break
+			}
+		}
+		if hyphenPos == -1 {
+			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeNGA)
+		}
+		phoneNumberNigeria := rd.Phone[hyphenPos+1:]
 		match, _ := regexp.MatchString(pattern, phoneNumberNigeria)
 		if !match {
-			return fmt.Errorf("invalid phone number format  %s entered", countryCode)
+			return errors.New("invalid phone number format")
 		}
-	case "+1":
+	} else if countryCodeUSA == "+1" {
 		pattern = `^\d{10}$` // USA
+		hyphenPos := -1
+		for i := 0; i < len(rd.Phone); i++ { //n.b i++ searches through the array to find -
+			if rd.Phone[i] == '-' {
+				hyphenPos = i
+				break
+			}
+		}
+		if hyphenPos == -1 {
+			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeUSA)
+		}
+		phoneNumberUSA := rd.Phone[hyphenPos+1:]
 		match, _ := regexp.MatchString(pattern, phoneNumberUSA)
 		if !match {
-			return fmt.Errorf("invalid phone number format  %s entered", countryCode)
+			return errors.New("invalid phone number format")
 		}
-	case "+44":
+	} else if countryCodeENGGER == "+44" {
 		pattern = `^\d{10}$` // England
-		match, _ := regexp.MatchString(pattern, phoneNumberEngland_Germany)
-		if !match {
-			return fmt.Errorf("invalid phone number format  %s entered", countryCode)
+		hyphenPos := -1
+		for i := 0; i < len(rd.Phone); i++ {
+			if rd.Phone[i] == '-' { // '-' extract a single charac
+				hyphenPos = i
+				break
+			}
 		}
-	case "+49":
+		if hyphenPos == -1 {
+			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGER)
+		}
+		phoneNumberEngland := rd.Phone[hyphenPos+1:]
+		match, _ := regexp.MatchString(pattern, phoneNumberEngland)
+		if !match {
+			return errors.New("invalid phone number format for")
+		}
+
+	} else if countryCodeENGGER == "+49" {
 		pattern = `^\d{10}$` // Germany
-		match, _ := regexp.MatchString(pattern, phoneNumberEngland_Germany)
-		if !match {
-			return fmt.Errorf("invalid phone number format  %s entered", countryCode)
+		hyphenPos := -1
+		for i := 0; i < len(rd.Phone); i++ {
+			if rd.Phone[i] == '-' {
+				hyphenPos = i
+				break
+			}
 		}
-
-	default:
-		return fmt.Errorf("invalid country code: %s, valid country codes are +234, +44, +1, and +49", countryCode)
-
+		if hyphenPos == -1 {
+			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGER)
+		}
+		phoneNumberGer := rd.Phone[hyphenPos+1:]
+		match, _ := regexp.MatchString(pattern, phoneNumberGer)
+		if !match {
+			return fmt.Errorf("invalid phone number format")
+		}
+	} else {
+		return fmt.Errorf("invalid country code:, valid country codes are +234, +44, +1, and +49")
 	}
 
 	return nil
