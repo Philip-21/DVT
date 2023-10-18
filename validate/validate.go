@@ -1,6 +1,7 @@
 package validate
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -10,12 +11,13 @@ import (
 )
 
 type RequestData struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
-	Phone string `json:"phone"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Phone    string `json:"phone"`
+	DateTime string `json:"date"`
 }
 
-func IsEmail(email string) bool {
+func ValidateEmail(email string) (bool) {
 	if !govalidator.IsEmail(email) {
 		log.Println("Invalid email format")
 		return false
@@ -109,18 +111,40 @@ func (rd *RequestData) ValidatePhone() error {
 	return nil
 }
 
+// func ValidateDateTime(timeStamp string) error {
+// 	var gmtTimeStamp string
+// 	var watTimeStamp string
+// 	var cetTimeStamp string
+// 	var eetTimeStamp string
+// 	var cstTimeStamp string
+
+// 	if gmtTimeStamp == `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+00:00$` {
+// 		regEXP := regexp.MustCompile(gmtTimeStamp)
+// 		match := regEXP.MatchString(timeStamp)
+// 		if !match {
+// 			return fmt.Errorf("invalid timestamp format for %s", timeStamp)
+// 		}
+
+// 	}
+// 	return nil
+// }
+
 // ValidateJSONData validates the RequestData structure
-func ValidateJSONData(data RequestData) error {
+func ValidateAllJSONData(data RequestData) ([]byte, error) {
 	if data.Name == "" {
-		return errors.New("name field is required")
+		return nil, errors.New("name field is required")
 	}
 
-	if !IsEmail(data.Email) {
-		return errors.New("invalid email format")
+	if !ValidateEmail(data.Email) {
+		return nil, errors.New("invalid email format")
 	}
 	if err := data.ValidatePhone(); err != nil {
-		return err
+		return nil, err
 	}
-
-	return nil
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		log.Println("JSON marshalling error:", err)
+		return nil, errors.New("failed to marshal JSON data")
+	}
+	return jsonData, nil
 }

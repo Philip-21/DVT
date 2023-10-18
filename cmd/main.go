@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
-	"philip-datavalidator/validate"
+
+
+	"github.com/philip-datavalidator/dvl/validate"
 )
 
 func main() {
@@ -10,14 +12,13 @@ func main() {
 	data := validate.RequestData{
 		Name:  "John Doe",
 		Email: "johndoe@example.com",
-		Phone: "234-9077421913",
+		Phone: "+234-9077421913",
 	}
-
 	// Validate the data
-	err := validate.ValidateJSONData(data)
+	jsonData, err := validate.ValidateAllJSONData(data)
 	if err != nil {
 		fmt.Println("Validation Error:", err)
 	} else {
-		fmt.Println("Data is valid")
+		fmt.Println("Data is valid", string(jsonData))
 	}
 }
