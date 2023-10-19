@@ -1,5 +1,5 @@
 # DataValidator Library
- The DataValidator Library is a versatile tool for validating and transforming data into JSON format. Whether you're handling API requests, database queries, or working with structured data, DataValidator simplifies the process.
+  DVL is a versatile tool for validating and transforming data into JSON format. Whether you're handling API requests, database queries, or working with structured data, DataValidator simplifies the process.
 
 ## Features
 
@@ -18,6 +18,25 @@
 -   Numeric Values : Validate numeric data, such as ages, prices, or quantities, are within acceptable ranges and have appropriate data types (e.g., integers or decimals).
 -   Geographical Coordinates: Validate latitude and longitude coordinates for accuracy and within acceptable ranges.
 
+## Installation
+      go get github.com/philip21/datavalidator
+
 ## Usage
 
-Validate and transform your data with ease:
+  ### Validate and transform your data with ease 
+  #### Validate email and convert to JSON
+
+```go
+import "github.com/philip21/datavalidator/dvl"
+
+func main() {
+    email := "john@example.com"
+    err := dvl.ValidateEmail(email)
+    if err != nil {
+	    	log.Println("Error:", err)
+	    	return 
+  	}
+}
+```
+#### Validate email, 
+ 
