@@ -1,0 +1,41 @@
+package dvl // import "github.com/philip21/datavalidator/dvl"
+
+
+FUNCTIONS
+
+func ValidateEmail(email any) error
+    validate an email, returns an error if any
+
+func ValidateEmailToString(email any) (string, error)
+    validate an email, returns an error if any and a JSON string format to be
+    used for specific purpose
+
+func ValidateEmailtoBytes(email any) ([]byte, error)
+    validates email and returns []byte, this give more flexibility, allowing
+    you to work with the JSON data in its raw binary form, using []byte approach
+    provides more control over how the JSON is handled
+
+func ValidatePhone(phonestr string) error
+    validate phone number based on country code NGA, USA, ENG, GER and returns
+    an error if any
+
+func ValidatePhoneToBytes(phone any) ([]byte, error)
+    validate phone number based on country code NGA, USA, ENG, GER returns an
+    error if any, and returns []byte, this give more flexibility, allowing you
+    to work with the JSON data in its raw binary form, using []byte approach
+    provides more control over how the JSON is handled
+
+func ValidatePhoneToString(phone any) (string, error)
+    validate phone number based on country code NGA, USA, ENG, GER returns an
+    error if any and a JSON string format to be used for specific purpose
+
+
+TYPES
+
+type RequestData struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Phone    string `json:"phone"`
+	DateTime string `json:"date"`
+}
+
