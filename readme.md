@@ -1,5 +1,5 @@
 # DataValidator Library
-  DVL is a versatile tool for validating and transforming data into JSON format. Whether you're handling API requests, database queries, or working with structured data, DataValidator simplifies the process.
+   DVL is a versatile tool for validating and transforming data into JSON format. Whether you're handling API requests, database queries, or working with structured data, DataValidator simplifies the process.
 
 ## Features
 
@@ -24,19 +24,49 @@
 ## Usage
 
   ### Validate and transform your data with ease 
-  #### Validate email and convert to JSON
+  #### Validate's Data and converts to JSON
 
 ```go
 import "github.com/philip21/datavalidator/dvl"
 
 func main() {
-    email := "john@example.com"
+    email := "philip@example.com"
     err := dvl.ValidateEmail(email)
     if err != nil {
-	    	log.Println("Error:", err)
-	    	return 
+        log.Println("Error:", err)
+          return 
   	}
+ }
+```
+   #### Validate's Data and returns the converted JSON data to string Format for specific use
+```go
+import "github.com/philip21/datavalidator/dvl"
+
+func main() {
+    mobile := +234-0000000000
+    jsonstring, err := dvl.ValidatePhoneToString(mobile)
+    if err != nil {
+        log.Println("Error:", err)
+        return 
+      }
+    //handle the jsonstring according to your needs 
 }
 ```
-#### Validate email, 
+  #### Validate's Data and returns the converted JSON data to raw []byte for specific use 
+```go
+import "github.com/philip21/datavalidator/dvl"
+
+func main() {
+    mobile := +44-0000000000
+    jsonByte, err := dvl.ValidatePhoneToBytes(mobile)
+    if err != nil {
+        log.Println("Error:", err)
+        return 
+      }
+    //handle the jsonByte according to your needs 
+}
+```
  
+
+
+
