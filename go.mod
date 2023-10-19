@@ -1,4 +1,4 @@
-module github.com/philip-datavalidator/dvl
+module github.com/philip21/datavalidator
 
 go 1.21.0
 
