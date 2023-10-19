@@ -1,4 +1,4 @@
-package validate
+package dvl
 
 // func ValidateDateTime(timeStamp string) error {
 // 	var gmtTimeStamp string
