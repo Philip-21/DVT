@@ -7,12 +7,10 @@ import (
 	"regexp"
 )
 
-func ValidatePhone(phone any) error {
-	phonestr, ok  := phone.(string)
-	if !ok {
-		return fmt.Errorf("unable to convert to string")
-	}
-
+// validate phone number based on country code 
+//NGA, USA, ENG, GER
+//and returns an error if any
+func ValidatePhone(phonestr string) error {
 	if len(phonestr) < 10 || phonestr[0] != '+' {
 		return fmt.Errorf("invalid phonestr field format, ensure you have + added at the beginning of the phone number")
 	}
@@ -102,8 +100,12 @@ func ValidatePhone(phone any) error {
 
 }
 
+//validate phone number based on country code 
+//NGA, USA, ENG, GER
+//returns an error if any
+//and a JSON string format to be used for  specific purpose
 func ValidatePhoneToString(phone any) (string, error) {
-	phonestr, ok  := phone.(string)
+	phonestr, ok := phone.(string)
 	if !ok {
 		return "", fmt.Errorf("unable to convert to string")
 	}
@@ -196,8 +198,14 @@ func ValidatePhoneToString(phone any) (string, error) {
 	return string(jsonData), nil
 }
 
+//validate phone number based on country code 
+//NGA, USA, ENG, GER
+//returns an error if any,
+//and returns []byte, this give more flexibility,
+//allowing you to work with the JSON data in its raw binary form, using []byte
+//approach provides more control over how the JSON is handled
 func ValidatePhoneToBytes(phone any) ([]byte, error) {
-	phonestr, ok  := phone.(string)
+	phonestr, ok := phone.(string)
 	if !ok {
 		return nil, fmt.Errorf("unable to convert to string")
 	}

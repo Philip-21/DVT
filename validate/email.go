@@ -2,22 +2,23 @@ package validate
 
 import (
 	"encoding/json"
+	
 	"fmt"
 	"log"
 
+	"github.com/pkg/errors"
 	"github.com/asaskevich/govalidator"
 )
 
-// validate emails and returns an error if any
+// validate an email, returns an error if any
 func ValidateEmail(email any) error {
 	emailStr, ok := email.(string)
 	if !ok {
-		return fmt.Errorf("unable to covert to string")
+		return errors.New("unable to covert to string")
 	}
-
 	if !govalidator.IsEmail(emailStr) {
-
-		return fmt.Errorf("invalid email format %s", email)
+		errMsg := fmt.Sprintf("invalid email format %s", emailStr)
+        return errors.New(errMsg)
 	}
 	_, err := json.Marshal(email)
 	if err != nil {
@@ -26,7 +27,7 @@ func ValidateEmail(email any) error {
 	return nil
 }
 
-// validates an email and returns a string JSON string format to be used for  specific purpose
+// validate an email, returns an error if any and a JSON string format to be used for  specific purpose
 func ValidateEmailToString(email any) (string, error) {
 	emailStr, ok := email.(string)
 	if !ok {
@@ -37,7 +38,7 @@ func ValidateEmailToString(email any) (string, error) {
 	}
 	jsonData, err := json.Marshal(email)
 	if err != nil {
-		return "", fmt.Errorf("invalid email format %s", email)
+		return "", err
 	}
 
 	return string(jsonData), nil
