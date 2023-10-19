@@ -1,24 +1,50 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
-
-	"github.com/philip-datavalidator/dvl/validate"
+	"github.com/philip21/datavalidator/dvl"
+	"github.com/philip21/datavalidator/validate"
 )
 
 func main() {
 	// Define a sample RequestData with only Name, Email, and a Nigerian Phone number
-	data := validate.RequestData{
-		Name:  "John Doe",
+
+	dat := validate.RequestData{
 		Email: "johndoe@example.com",
-		Phone: "+234-9077421913",
 	}
-	// Validate the data
-	jsonData, err := validate.ValidateAllJSONData(data)
+	num := "+234-8166959918"
+	nameemail := "hilary@gmail.com"
+	err := dvl.ValidateEmail(nameemail)
 	if err != nil {
-		fmt.Println("Validation Error:", err)
-	} else {
-		fmt.Println("Data is valid", string(jsonData))
+		log.Println("Error:", err)
+		return 
 	}
+	st, err := dvl.ValidateEmailToString(nameemail)
+	if err != nil {
+		log.Println("Error:", err)
+		return 
+	} else {
+		log.Println("Data is Valid", st)
+	}
+	jdata, err := dvl.ValidateEmailtoBytes(nameemail)
+	if err != nil {
+		log.Println("Error:", err)
+		return
+	} else {
+		log.Println("Data is Valid", jdata)
+	}
+	str, err := dvl.ValidateEmailToString(dat.Email)
+	if err != nil {
+		log.Println("Error:", err)
+		return
+	} else {
+		log.Println("Data is Valid", str)
+	}
+	nh, err := validate.ValidatePhoneToString(num)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(nh)
+
 }

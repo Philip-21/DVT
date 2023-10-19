@@ -11,7 +11,7 @@
 
 ### Kinds of Data DVL validates
 
--   Name: Item or Individual name in string format
+-   Name: Item or Individual name
 -   Email: Validate email's to its specific syntax
 -   Phone number : Phone number support for Nigeria, USA, England and Germany formats
 -   Dates and Times: Ensure that dates and times are in the correct format and fall within acceptable range and time zone.
