@@ -14,7 +14,7 @@ DVL is a versatile tool for validating and transforming data into JSON format. W
 
 -   Name: Item or Individual name
 -   Email: Validate email's to its specific syntax
--   Phone number : Phone number support for Nigeria, USA, England and Germany formats
+-   Phone number : Phone number support for Nigeria, USA, England, Germany and India formats
 -   Dates and Times: Ensure that dates and times are in the correct format and fall within acceptable range and time zone.
 -   Numeric Values : Validate numeric data, such as ages, prices, or quantities, are within acceptable ranges and have appropriate data types (e.g., integers or decimals).
 -   Geographical Coordinates: Validate latitude and longitude coordinates for accuracy and within acceptable ranges.
