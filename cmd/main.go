@@ -13,7 +13,7 @@ func main() {
 	dat := dvl.RequestData{
 		Email: "johndoe@example.com",
 	}
-	num := "+234-8166959918"
+	num := "+42-8166959918"
 	nameemail := "hilary@gmail.com"
 	err := dvl.ValidateEmail(nameemail)
 	if err != nil {

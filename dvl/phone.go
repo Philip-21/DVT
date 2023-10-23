@@ -7,16 +7,16 @@ import (
 	"regexp"
 )
 
-// validate phone number based on country code 
-//NGA, USA, ENG, GER
-//and returns an error if any
+// validate phone number based on country code
+// NGA, USA, ENG, GER, IND
+// and returns an error if any
 func ValidatePhone(phonestr string) error {
 	if len(phonestr) < 10 || phonestr[0] != '+' {
 		return fmt.Errorf("invalid phonestr field format, ensure you have + added at the beginning of the phone number")
 	}
 	countryCodeNGA := phonestr[0:4]
 	countryCodeUSA := phonestr[0:2]
-	countryCodeENGGER := phonestr[0:3]
+	countryCodeENGGERIND := phonestr[0:3]
 	var pattern string
 
 	if countryCodeNGA == "+234" {
@@ -54,7 +54,7 @@ func ValidatePhone(phonestr string) error {
 		if !match {
 			return errors.New("invalid phone number format")
 		}
-	} else if countryCodeENGGER == "+44" {
+	} else if countryCodeENGGERIND == "+44" {
 		pattern = `^\d{10}$` // England
 		hyphenPos := -1
 		for i := 0; i < len(phonestr); i++ {
@@ -64,7 +64,7 @@ func ValidatePhone(phonestr string) error {
 			}
 		}
 		if hyphenPos == -1 {
-			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGER)
+			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGERIND)
 		}
 		phonestrNumberEngland := phonestr[hyphenPos+1:]
 		match, _ := regexp.MatchString(pattern, phonestrNumberEngland)
@@ -72,7 +72,7 @@ func ValidatePhone(phonestr string) error {
 			return errors.New("invalid phone number format for")
 		}
 
-	} else if countryCodeENGGER == "+49" {
+	} else if countryCodeENGGERIND == "+49" {
 		pattern = `^\d{10}$` // Germany
 		hyphenPos := -1
 		for i := 0; i < len(phonestr); i++ {
@@ -82,7 +82,7 @@ func ValidatePhone(phonestr string) error {
 			}
 		}
 		if hyphenPos == -1 {
-			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGER)
+			return fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGERIND)
 		}
 		phonestrNumberGer := phonestr[hyphenPos+1:]
 		match, _ := regexp.MatchString(pattern, phonestrNumberGer)
@@ -90,7 +90,7 @@ func ValidatePhone(phonestr string) error {
 			return fmt.Errorf("invalid phone number format")
 		}
 	} else {
-		return fmt.Errorf("invalid country code:, valid country codes are +234, +44, +1, and +49")
+		return fmt.Errorf("invalid country code: %s, valid country codes are +234, +1,+44, +49, +91", phonestr)
 	}
 	_, err := json.Marshal(phonestr)
 	if err != nil {
@@ -100,10 +100,10 @@ func ValidatePhone(phonestr string) error {
 
 }
 
-//validate phone number based on country code 
-//NGA, USA, ENG, GER
-//returns an error if any
-//and a JSON string format to be used for  specific purpose
+// validate phone number based on country code
+// NGA, USA, ENG, GER, IND
+// returns an error if any
+// and a JSON string format to be used for  specific purpose
 func ValidatePhoneToString(phone any) (string, error) {
 	phonestr, ok := phone.(string)
 	if !ok {
@@ -115,6 +115,7 @@ func ValidatePhoneToString(phone any) (string, error) {
 	countryCodeNGA := phonestr[0:4]
 	countryCodeUSA := phonestr[0:2]
 	countryCodeENGGER := phonestr[0:3]
+	countryCodeIND := phonestr[0:3]
 	var pattern string
 
 	if countryCodeNGA == "+234" {
@@ -152,8 +153,8 @@ func ValidatePhoneToString(phone any) (string, error) {
 		if !match {
 			return "", errors.New("invalid phone number format")
 		}
-	} else if countryCodeENGGER == "+44" {
-		pattern = `^\d{10}$` // England
+	} else if countryCodeIND == "+91" {
+		pattern = `^\d{10}$` // India
 		hyphenPos := -1
 		for i := 0; i < len(phonestr); i++ {
 			if phonestr[i] == '-' { // '-' extract a single charac
@@ -162,15 +163,14 @@ func ValidatePhoneToString(phone any) (string, error) {
 			}
 		}
 		if hyphenPos == -1 {
-			return "", fmt.Errorf("invalid phone format, missing - after %s", countryCodeENGGER)
+			return "", fmt.Errorf("invalid phone format, missing - after %s", countryCodeIND)
 		}
-		phonestrNumberEngland := phonestr[hyphenPos+1:]
-		match, _ := regexp.MatchString(pattern, phonestrNumberEngland)
+		phonestrNumberIND := phonestr[hyphenPos+1:]
+		match, _ := regexp.MatchString(pattern, phonestrNumberIND)
 		if !match {
 			return "", errors.New("invalid phone number format")
 		}
-
-	} else if countryCodeENGGER == "+49" {
+	} else if countryCodeENGGER == "+49" || countryCodeENGGER == "+44" {
 		pattern = `^\d{10}$` // Germany
 		hyphenPos := -1
 		for i := 0; i < len(phonestr); i++ {
@@ -188,7 +188,7 @@ func ValidatePhoneToString(phone any) (string, error) {
 			return "", fmt.Errorf("invalid phone number format")
 		}
 	} else {
-		return "", fmt.Errorf("invalid country code:, valid country codes are +234, +44, +1, and +49")
+		return "", fmt.Errorf("invalid country code: %s, valid country codes are +234, +1,+44, +49, +91", phonestr)
 	}
 	jsonData, err := json.Marshal(phonestr)
 	if err != nil {
@@ -198,12 +198,12 @@ func ValidatePhoneToString(phone any) (string, error) {
 	return string(jsonData), nil
 }
 
-//validate phone number based on country code 
-//NGA, USA, ENG, GER
-//returns an error if any,
-//and returns []byte, this give more flexibility,
-//allowing you to work with the JSON data in its raw binary form, using []byte
-//approach provides more control over how the JSON is handled
+// validate phone number based on country code
+// NGA, USA, ENG, GER, IND
+// returns an error if any,
+// and returns []byte, this give more flexibility,
+// allowing you to work with the JSON data in its raw binary form, using []byte
+// approach provides more control over how the JSON is handled
 func ValidatePhoneToBytes(phone any) ([]byte, error) {
 	phonestr, ok := phone.(string)
 	if !ok {
@@ -288,7 +288,7 @@ func ValidatePhoneToBytes(phone any) ([]byte, error) {
 			return nil, fmt.Errorf("invalid phone number format")
 		}
 	} else {
-		return nil, fmt.Errorf("invalid country code:, valid country codes are +234, +44, +1, and +49")
+		return nil, fmt.Errorf("invalid country code: %s, valid country codes are +234, +1,+44, +49, +91", phonestr)
 	}
 	jsonData, err := json.Marshal(phonestr)
 	if err != nil {
