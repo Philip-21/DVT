@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/philip21/datavalidator/dvl"
-	
 )
 
 func main() {
@@ -13,17 +12,17 @@ func main() {
 	dat := dvl.RequestData{
 		Email: "johndoe@example.com",
 	}
-	num := "+42-8166959918"
+	num := "+234-8166959918"
 	nameemail := "hilary@gmail.com"
 	err := dvl.ValidateEmail(nameemail)
 	if err != nil {
 		log.Println("Error:", err)
-		return 
+		return
 	}
 	st, err := dvl.ValidateEmailToString(nameemail)
 	if err != nil {
 		log.Println("Error:", err)
-		return 
+		return
 	} else {
 		log.Println("Data is Valid", st)
 	}
@@ -46,5 +45,15 @@ func main() {
 		log.Println(err)
 	}
 	log.Println(nh)
+	m, err := dvl.ValidatePhoneToBytes(num)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(m)
+	date := "2023-07-10T16:22:41-06:00"
+	err = dvl.ValidateDateTime(date)
+	if err != nil {
+		log.Println("Error:", err)
+	}
 
 }
