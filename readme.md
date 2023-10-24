@@ -99,4 +99,4 @@ func main() {
 
 ## License
 
-See DVL MIT License[license.md]
+See DVL MIT [License](https://github.com/Philip-21/DVL/blob/master/license.md)
