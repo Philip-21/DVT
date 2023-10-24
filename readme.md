@@ -74,7 +74,9 @@ func main() {
     //handle the jsonByte according to your needs
 }
 ```
-#### Validate's Data with struct types 
+
+#### Validate's Data with struct types
+
 ```go
 import "github.com/philip21/datavalidator/dvl"
 type RequestData struct{
@@ -91,8 +93,10 @@ func main() {
         return
       }
     //handle the jsonByte according to your needs
-  
+
 }
 ```
+
 ## License
- See DVL MIT License[license.md]
+
+See DVL MIT License[license.md]
