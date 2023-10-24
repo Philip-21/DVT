@@ -78,6 +78,19 @@ func main() {
 ```go
 import "github.com/philip21/datavalidator/dvl"
 type RequestData struct{
+  Date string
 }
 
+func main() {
+   dat := RequestData {
+    Date : "2023-07-10T16:22:41+01:00"
+ }
+  jsonString, err := dvl.ValidateDateTimeToString(dat.Date)
+  if err != nil {
+        log.Println("Error:", err)
+        return
+      }
+    //handle the jsonByte according to your needs
+  
+}
 ```
