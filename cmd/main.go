@@ -5,13 +5,16 @@ import (
 
 	"github.com/philip21/datavalidator/dvl"
 )
-
+type RequestData struct{
+	Date string
+  }
 func main() {
 	// Define a sample RequestData with only Name, Email, and a Nigerian Phone number
 
 	dat := dvl.RequestData{
 		Email: "johndoe@example.com",
 	}
+	
 	num := "+234-8166959918"
 	nameemail := "hilary@gmail.com"
 	err := dvl.ValidateEmail(nameemail)
@@ -51,9 +54,10 @@ func main() {
 	}
 	log.Println(m)
 	date := "2023-07-10T16:22:41-06:00"
-	err = dvl.ValidateDateTime(date)
+	jsd, err := dvl.ValidateDateTimeToString(date)
 	if err != nil {
 		log.Println("Error:", err)
 	}
+	log.Println(jsd)
 
 }
