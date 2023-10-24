@@ -94,4 +94,5 @@ func main() {
   
 }
 ```
-## Licenses
+## License
+ See DVL MIT License[license.md]
