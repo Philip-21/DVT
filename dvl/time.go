@@ -46,11 +46,11 @@ func ValidateDateTime(timeStamp string) error {
 	case regexp.MustCompile(cstTimeStamp).MatchString(timeStamp):
 		regEXP = regexp.MustCompile(cstTimeStamp)
 	default:
-		return fmt.Errorf("invalid DateTime format: %s\n", timeStamp, Errtime)
+		return fmt.Errorf("invalid DateTime format:%s", timeStamp)
 	}
 
 	if !regEXP.MatchString(timeStamp) {
-		return fmt.Errorf("invalid timestamp format for %s", timeStamp, Errtime)
+		return fmt.Errorf("invalid timestamp format for %s", timeStamp)
 	}
 
 	return nil
@@ -81,11 +81,11 @@ func ValidateDateTimeToString(timeStamp string) (string, error) {
 	case regexp.MustCompile(cstTimeStamp).MatchString(timeStamp):
 		regEXP = regexp.MustCompile(cstTimeStamp)
 	default:
-		return "", fmt.Errorf("invalid DateTime format: %s\n", timeStamp, Errtime)
+		return "", fmt.Errorf("invalid DateTime format: %s", timeStamp)
 	}
 
 	if !regEXP.MatchString(timeStamp) {
-		return "", fmt.Errorf("invalid timestamp format for %s", timeStamp, Errtime)
+		return "", fmt.Errorf("invalid timestamp format for %s", timeStamp)
 	}
 	jsonString, err := json.Marshal(timeStamp)
 	if err != nil {
@@ -119,11 +119,11 @@ func ValidateDateTimeToBytes(timeStamp string) ([]byte, error) {
 	case regexp.MustCompile(cstTimeStamp).MatchString(timeStamp):
 		regEXP = regexp.MustCompile(cstTimeStamp)
 	default:
-		return nil, fmt.Errorf("invalid DateTime format: %s\n", timeStamp, Errtime)
+		return nil, fmt.Errorf("invalid DateTime format: %s", timeStamp)
 	}
 
 	if !regEXP.MatchString(timeStamp) {
-		return nil, fmt.Errorf("invalid timestamp format for %s", timeStamp, Errtime)
+		return nil, fmt.Errorf("invalid timestamp format for %s", timeStamp)
 	}
 	jsonString, err := json.Marshal(timeStamp)
 	if err != nil {
