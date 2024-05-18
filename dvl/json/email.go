@@ -1,13 +1,13 @@
-package dvl
+package json
 
 import (
 	"encoding/json"
-	
+
 	"fmt"
 	"log"
 
-	"github.com/pkg/errors"
 	"github.com/asaskevich/govalidator"
+	"github.com/pkg/errors"
 )
 
 // validate an email, returns an error if any
@@ -18,7 +18,7 @@ func ValidateEmail(email any) error {
 	}
 	if !govalidator.IsEmail(emailStr) {
 		errMsg := fmt.Sprintf("invalid email format %s", emailStr)
-        return errors.New(errMsg)
+		return errors.New(errMsg)
 	}
 	_, err := json.Marshal(email)
 	if err != nil {

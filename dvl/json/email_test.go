@@ -1,4 +1,4 @@
-package dvl
+package json
 
 import (
 	"testing"
