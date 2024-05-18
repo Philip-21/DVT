@@ -33,30 +33,6 @@ var testEmails = []struct {
 	},
 }
 
-func TestValidateEmail(t *testing.T) {
-	for _, tc := range testEmails {
-		t.Run("Test Mails", func(t *testing.T) {
-			err := ValidateEmail(tc.ValidEmail)
-			if err != nil {
-				t.Log(err)
-				return
-			}
-			if tc.InvalidData == true {
-				t.Log("Invalid data inputed ")
-			}
-			err = ValidateEmail(tc.InvalidEmail)
-			if err != nil {
-				t.Log(err)
-				return
-			}
-			if tc.InvalidData == true {
-				t.Log("Invalid data inputed ")
-			}
-		})
-	}
-	t.Log("Test Passed")
-}
-
 func TestValidateEmailString(t *testing.T) {
 	for _, ts := range testEmails {
 		_, err := ValidateEmailToString(ts.ValidEmail)

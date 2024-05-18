@@ -7,25 +7,7 @@ import (
 	"log"
 
 	"github.com/asaskevich/govalidator"
-	"github.com/pkg/errors"
 )
-
-// validate an email, returns an error if any
-func ValidateEmail(email any) error {
-	emailStr, ok := email.(string)
-	if !ok {
-		return errors.New("unable to covert to string")
-	}
-	if !govalidator.IsEmail(emailStr) {
-		errMsg := fmt.Sprintf("invalid email format %s", emailStr)
-		return errors.New(errMsg)
-	}
-	_, err := json.Marshal(email)
-	if err != nil {
-		return err
-	}
-	return nil
-}
 
 // validate an email, returns an error if any and a JSON string format to be used for  specific purpose
 func ValidateEmailToString(email any) (string, error) {

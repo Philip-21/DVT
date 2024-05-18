@@ -6,18 +6,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-// validate name, returns an error if any
-func ValidateName(name any) error {
-	nameStr, ok := name.(string)
-	if !ok {
-		return errors.New("unable to convert to string")
-	}
-	_, err := json.Marshal(nameStr)
-	if err != nil {
-		return err
-	}
-	return nil
-}
 
 // validate name, returns an error if any and a JSON string format to be used for  specific purpose
 func ValidateNameToString(name any) (string, error) {
