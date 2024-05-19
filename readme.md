@@ -1,6 +1,7 @@
-# DataValidator Library
+# DataValidatorTransform Library
 
-DVL is a versatile tool for validating and transforming data into JSON format. Whether you're handling API requests, database queries, or working with structured data, DataValidator simplifies the process.
+dvt is a versatile tool for validating data types. Whether you're handling API requests, database queries, or working with structured data, DataValidator simplifies the process.
+It also has the option for transforming validated data into various formats
 
 ## Features
 
@@ -10,7 +11,7 @@ DVL is a versatile tool for validating and transforming data into JSON format. W
 -   Developer-Friendly: Simple and intuitive functions for data validation and transformation.
 -   Customizable: Tailor validation to your specific needs, choosing which data fields to validate.
 
-### Kinds of Data DVL validates
+### Kinds of Data DVT validates
 
 -   Name: Item or Individual name
 -   Email: Validate email's to its specific syntax
@@ -31,11 +32,11 @@ DVL is a versatile tool for validating and transforming data into JSON format. W
 #### Validate's Data and converts to JSON
 
 ```go
-import "github.com/philip21/datavalidator/dvl"
+import "github.com/philip21/datavalidator/dvt"
 
 func main() {
     email := "philip@example.com"
-    err := dvl.ValidateEmail(email)
+    err := dvt.ValidateEmail(email)
     if err != nil {
         log.Println("Error:", err)
           return
@@ -46,11 +47,11 @@ func main() {
 #### Validate's Data and returns the converted JSON data to string Format for specific use
 
 ```go
-import "github.com/philip21/datavalidator/dvl"
+import "github.com/philip21/datavalidator/dvt"
 
 func main() {
     mobile := "+234-0000000000"
-    jsonstring, err := dvl.ValidatePhoneToString(mobile)
+    jsonstring, err := dvt.ValidatePhoneToString(mobile)
     if err != nil {
         log.Println("Error:", err)
         return
@@ -62,11 +63,11 @@ func main() {
 #### Validate's Data and returns the converted JSON data to raw []byte for specific use
 
 ```go
-import "github.com/philip21/datavalidator/dvl"
+import "github.com/philip21/datavalidator/dvt"
 
 func main() {
     mobile := "+44-0000000000"
-    jsonByte, err := dvl.ValidatePhoneToBytes(mobile)
+    jsonByte, err := dvt.ValidatePhoneToBytes(mobile)
     if err != nil {
         log.Println("Error:", err)
         return
@@ -78,7 +79,7 @@ func main() {
 #### Validate's Data with struct types
 
 ```go
-import "github.com/philip21/datavalidator/dvl"
+import "github.com/philip21/datavalidator/dvt"
 type RequestData struct{
   Date string
 }
@@ -87,7 +88,7 @@ func main() {
    dat := RequestData {
     Date : "2023-07-10T16:22:41+01:00"
  }
-  jsonString, err := dvl.ValidateDateTimeToString(dat.Date)
+  jsonString, err := dvt.ValidateDateTimeToString(dat.Date)
   if err != nil {
         log.Println("Error:", err)
         return
@@ -99,4 +100,4 @@ func main() {
 
 ## License
 
-See DVL MIT [License](https://github.com/Philip-21/DVL/blob/master/license.md)
+See dvt MIT [License](https://github.com/Philip-21/dvt/blob/master/license.md)
