@@ -1,0 +1,61 @@
+package dvt // import "github.com/philip21/datavalidator/dvt"
+
+
+VARIABLES
+
+var Errtime = ErrTime()
+
+FUNCTIONS
+
+func ErrTime() string
+func ValidateDateTime(timeStamp string) error
+func ValidateDateTimeToBytes(timeStamp string) ([]byte, error)
+func ValidateDateTimeToString(timeStamp string) (string, error)
+func ValidateEmail(email any) error
+    validate an email, returns an error if any
+
+func ValidateEmailToString(email any) (string, error)
+    validate an email, returns an error if any and a JSON string format to be
+    used for specific purpose
+
+func ValidateEmailtoBytes(email any) ([]byte, error)
+    validates email and returns []byte, this give more flexibility, allowing
+    you to work with the JSON data in its raw binary form, using []byte approach
+    provides more control over how the JSON is handled
+
+func ValidateName(name any) error
+    validate name, returns an error if any
+
+func ValidateNameToBytes(name any) ([]byte, error)
+    validates name and returns []byte, this give more flexibility, allowing you
+    to work with the JSON data in its raw binary form, using []byte approach
+    provides more control over how the JSON is handled
+
+func ValidateNameToString(name any) (string, error)
+    validate name, returns an error if any and a JSON string format to be used
+    for specific purpose
+
+func ValidatePhone(phone any) error
+    validate phone number based on country code NGA, USA, ENG, GER, IND and
+    returns an error if
+
+func ValidatePhoneToBytes(phone any) ([]byte, error)
+    validate phone number based on country code NGA, USA, ENG, GER, IND returns
+    an error if any, and returns []byte, this give more flexibility, allowing
+    you to work with the JSON data in its raw binary form, using []byte approach
+    provides more control over how the JSON is handled
+
+func ValidatePhoneToString(phone any) (string, error)
+    validate phone number based on country code NGA, USA, ENG, GER, IND returns
+    an error if any and a JSON string format to be used for specific purpose
+
+
+TYPES
+
+type RequestData struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Phone    string `json:"phone"`
+	DateTime string `json:"date"`
+}
+
