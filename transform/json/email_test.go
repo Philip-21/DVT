@@ -35,7 +35,7 @@ var testEmails = []struct {
 
 func TestTransformEmailString(t *testing.T) {
 	for _, ts := range testEmails {
-		_, err := EmailToString(ts.ValidEmail)
+		_, _, err := EmailToString(ts.ValidEmail)
 		if err != nil {
 			t.Log(err)
 			return
@@ -43,7 +43,7 @@ func TestTransformEmailString(t *testing.T) {
 		if ts.InvalidData == true {
 			t.Log("Invalid data inputed ")
 		}
-		_, err = EmailToString(ts.InvalidEmail)
+		_, _, err = EmailToString(ts.InvalidEmail)
 		if err != nil {
 			t.Log(err)
 			return

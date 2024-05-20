@@ -10,20 +10,20 @@ import (
 )
 
 // validate's and converts  an email to  a string JSON object.
-func EmailToString(email any) (string, error) {
+func EmailToString(email any) (string, bool, error) {
 	emailStr, ok := email.(string)
 	if !ok {
-		return "", fmt.Errorf("invalid email format, expected a string")
+		return "", false, fmt.Errorf("invalid email format, expected a string")
 	}
 	if !govalidator.IsEmail(emailStr) {
-		return "", fmt.Errorf("invalid email format %s", email)
+		return "", false, fmt.Errorf("invalid email format %s", email)
 	}
 
 	jsonData, err := json.Marshal(email)
 	if err != nil {
-		return "", err
+		return "", false, err
 	}
-	return string(jsonData), nil
+	return string(jsonData), true, nil
 }
 
 // validates an email to a []byte type , this give more flexibility,

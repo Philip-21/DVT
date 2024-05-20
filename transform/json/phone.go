@@ -8,7 +8,7 @@ import (
 
 // validate phone number based on country code
 // NGA, USA, ENG, GER, IND
-// returns  a JSON string 
+// returns  a JSON string object
 func PhoneToString(phone any) (string, error) {
 	phonestr, ok := phone.(string)
 	if !ok {
@@ -60,7 +60,7 @@ func PhoneToString(phone any) (string, error) {
 
 // validate phone number based on country code
 // NGA, USA, ENG, GER, IND
-// returns a []byte, this give more flexibility,
+// to a []byte, this give more flexibility,
 // allowing you to work with the JSON data in its raw binary form, using []byte
 // approach provides more control over how the JSON is handled
 func PhoneToBytes(phone any) ([]byte, error) {
