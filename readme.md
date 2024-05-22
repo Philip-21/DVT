@@ -32,11 +32,11 @@ It also has the option for transforming validated data into various formats
 #### Validate's Data and converts to JSON
 
 ```go
-import "github.com/philip21/datavalidator/dvt"
+import "github.com/philip21/dvt/validate"
 
 func main() {
     email := "philip@example.com"
-    err := dvt.ValidateEmail(email)
+    err := validate.ValidateEmail(email)
     if err != nil {
         log.Println("Error:", err)
           return
@@ -44,42 +44,42 @@ func main() {
  }
 ```
 
-#### Validate's Data and returns the converted JSON data to string Format for specific use
+#### Validate and transform data to JSON string Format for specific use
 
 ```go
-import "github.com/philip21/datavalidator/dvt"
+import "github.com/philip21/dvt/transform/json"
 
 func main() {
     mobile := "+234-0000000000"
-    jsonstring, err := dvt.ValidatePhoneToString(mobile)
+    jsonstring, err := json.PhoneToString(mobile)
     if err != nil {
         log.Println("Error:", err)
         return
       }
-    //handle the jsonstring according to your needs
+    //handle the jsonstring accordingly
 }
 ```
 
-#### Validate's Data and returns the converted JSON data to raw []byte for specific use
+#### Validate and transform data to JSON raw []byte for specific use
 
 ```go
-import "github.com/philip21/datavalidator/dvt"
+import "github.com/philip21/dvt/transform/json"
 
 func main() {
     mobile := "+44-0000000000"
-    jsonByte, err := dvt.ValidatePhoneToBytes(mobile)
+    jsonByte, err := json.PhoneToString(mobile)
     if err != nil {
         log.Println("Error:", err)
         return
       }
-    //handle the jsonByte according to your needs
+    //handle the jsonByte accordingly
 }
 ```
 
 #### Validate's Data with struct types
 
 ```go
-import "github.com/philip21/datavalidator/dvt"
+import "github.com/philip21/dvt/validate"
 type RequestData struct{
   Date string
 }
@@ -88,12 +88,12 @@ func main() {
    dat := RequestData {
     Date : "2023-07-10T16:22:41+01:00"
  }
-  jsonString, err := dvt.ValidateDateTimeToString(dat.Date)
+  date, boolValues, err := validate.DateTime(dat.Date)
   if err != nil {
         log.Println("Error:", err)
         return
       }
-    //handle the jsonByte according to your needs
+    //handle the variables accordingly
 
 }
 ```
