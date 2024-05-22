@@ -6,7 +6,7 @@ It also has the option for transforming validated data into various formats
 ## Features
 
 -   Seamless Data Validation: Ensure your data meets the required criteria and format.
--   Data Transformation: Convert validated data into structured JSON for easy processing.
+-   Data Transformation: Convert validated data into structured formats (e.g json) for easy processing.
 -   Versatile Use Cases: Suitable for API requests, database queries, and working with various data structures.
 -   Developer-Friendly: Simple and intuitive functions for data validation and transformation.
 -   Customizable: Tailor validation to your specific needs, choosing which data fields to validate.
