@@ -13,13 +13,17 @@ It also has the option for transforming validated data into various formats
 
 ### Kinds of Data DVT validates
 
--   Name: Item or Individual name
 -   Email: Validate email's to its specific syntax
 -   Phone number : Phone number support for Nigeria, USA, England, Germany and India formats
 -   Dates and Times: Ensure that dates and times are in the correct format and fall within acceptable range and time zone.
     timezone fomats supported Include [GMT, WAT, CET, EET, CST]
+-   URLs: Ensure URLs are syntactically correct and optionally reachable.
+-   IP Addresses: Validate both IPv4 and IPv6 addresses.
+-   Currency Codes: Validate that currency codes comply with the ISO 4217 standard.
+-   Hexadecimal Values: Ensure strings are valid hexadecimal representations.
 -   Numeric Values : Validate numeric data, such as ages, prices, or quantities, are within acceptable ranges and have appropriate data types (e.g., integers or decimals).
 -   Geographical Coordinates: Validate latitude and longitude coordinates for accuracy and within acceptable ranges.
+-   Social Security Numbers (SSNs): Validate SSNs for specific countries (e.g., US).
 
 ## Installation
 
