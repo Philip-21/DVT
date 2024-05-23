@@ -34,7 +34,7 @@ It also has the option for transforming validated data into various formats
 
 ## Installation
 
-      go get github.com/philip21/datavalidator
+      go get github.com/philip21/dvt
 
 ## Usage
 
